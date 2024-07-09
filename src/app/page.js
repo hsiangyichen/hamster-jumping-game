@@ -1,95 +1,85 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+import React, { useState, useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setHighestScore } from "./redux/store";
+import Hamster from "./components/Hamster";
+import Objects from "./components/Objects";
+import Ground from "./components/Ground";
+import GameOver from "./components/GameOver";
+import styles from "./styles.module.scss";
+import StartButton from "./components/StartButton";
 
 export default function Home() {
+  const [gameStarted, setGameStarted] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
+  const [score, setScore] = useState(0);
+  const highestScore = useSelector((state) => state.score.highestScore);
+  const dispatch = useDispatch();
+
+  const handleStart = () => {
+    setGameStarted(true);
+    setGameOver(false);
+    setScore(0); // Reset the score when the game starts
+  };
+
+  const handleGameOver = useCallback(() => {
+    setGameStarted(false);
+    setGameOver(true);
+    if (score > highestScore) {
+      dispatch(setHighestScore(score));
+    }
+  }, [dispatch, score, highestScore]);
+
+  const handleRestart = () => {
+    setGameStarted(false);
+    setGameOver(false);
+    handleStart();
+  };
+
+  const handleScoreUpdate = useCallback((newScore) => {
+    setScore((prevScore) => prevScore + newScore);
+  }, []);
+
+  useEffect(() => {
+    if (!gameStarted) return;
+    const interval = setInterval(() => {
+      setScore((prevScore) => {
+        const newScore = prevScore + 1;
+        return newScore;
+      });
+    }, 100);
+
+    return () => {
+      // Clear the interval when the game stops
+      clearInterval(interval);
+    };
+  }, [gameStarted]);
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Hamster Jumping Game</h1>
+
+      <div className={styles.gameArea}>
+        {gameOver && <GameOver onRestart={handleRestart} score={score} />}
+        <div className={styles.hamster}>
+          <Hamster
+            gameStarted={gameStarted}
+            onGameOver={handleGameOver}
+            onScoreUpdate={handleScoreUpdate}
+          />
+        </div>
         <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+          <Objects gameStarted={gameStarted} />
+        </div>
+        <div className={styles.ground}>
+          <Ground gameStarted={gameStarted} />
+        </div>
+        {!gameStarted && !gameOver && <StartButton onStart={handleStart} />}
+        <div className={styles.scoreContainer}>
+          <div className={styles.score}>Score: {score}</div>
+          <div className={styles.score}>Highest Score: {highestScore}</div>
         </div>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </div>
   );
 }

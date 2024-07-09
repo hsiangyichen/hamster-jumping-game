@@ -1,0 +1,74 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.title {
+  margin-bottom: 50px;
+  color: #331d0c;
+  font-weight: 500;
+  font-size: xx-large;
+}
+
+.gameArea {
+  width: 1000px;
+  height: 300px;
+  // background-color: #e3dede;
+  background-color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.hamster {
+  position: absolute;
+  rotate: -3deg;
+  bottom: 15px;
+  left: 60px;
+  z-index: 2;
+}
+
+.obstacle {
+  position: absolute;
+  //   bottom: 25px;
+  //   left: 120px;
+  animation: moveObstacle 4s linear infinite;
+}
+
+.scoreContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.score {
+  padding: 10px 20px;
+  font-size: 20px;
+}
+
+.ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+@keyframes moveObstacle {
+  0% {
+    left: 1060px;
+  }
+  100% {
+    left: -60px;
+  }
+}
+
+@keyframes moveGround {
+  0% {
+    background-position: 60px 0;
+  }
+  100% {
+    background-position: -1060px 0;
+  }
+}
