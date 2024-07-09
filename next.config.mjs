@@ -1,21 +1,27 @@
+import withSVGR from "@svgr/webpack";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  webpack: (config) => {
+  webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
+      issuer: {
+        and: [/\.(js|ts)x?$/],
+      },
       use: ["@svgr/webpack"],
     });
+
     return config;
   },
+
   async headers() {
     return [
       {
-        source: "/:path*",
+        source: "/(.*)",
         headers: [
           {
-            key: "Content-Security-Policy",
-            value:
-              "frame-ancestors 'self' http://localhost:3000 https://michelle-portfolio-iota.vercel.app/ https://hamster-jumping-game-6drewmzcd-hsiangyichens-projects.vercel.app/ https://hamster-jumping-game.vercel.app/",
+            key: "X-Frame-Options",
+            value: "SAMEORIGIN",
           },
         ],
       },
