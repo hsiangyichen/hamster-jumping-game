@@ -13,12 +13,9 @@ const nextConfig = {
         source: "/:path*",
         headers: [
           {
-            key: "X-Frame-Options",
-            value: "SAMEORIGIN", // or 'ALLOW-FROM https://example.com'
-          },
-          {
             key: "Content-Security-Policy",
-            value: "frame-ancestors 'self' https://example.com", // Update with your requirements
+            value:
+              "frame-ancestors 'self' http://localhost:3000 https://michelle-portfolio-iota.vercel.app/ https://hamster-jumping-game-6drewmzcd-hsiangyichens-projects.vercel.app/ https://hamster-jumping-game.vercel.app/",
           },
         ],
       },
