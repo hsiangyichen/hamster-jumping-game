@@ -2,12 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import styles from "./styles.module.scss";
 
-const Hamster = ({ gameStarted, onGameOver, onScoreUpdate }) => {
+const Hamster = ({ gameStarted, onGameOver, onScoreUpdate, onSeedScoreUp }) => {
   const [position, setPosition] = useState(0);
   const [backToGround, setBackToGround] = useState(true);
   const [imageIndex, setImageIndex] = useState(0);
   const [imageDelay, setImageDelay] = useState(300);
-
   const [lastCollidedObject, setLastCollidedObject] = useState(null);
   const jumpRef = useRef(null);
   const imageSources = [
@@ -15,14 +14,12 @@ const Hamster = ({ gameStarted, onGameOver, onScoreUpdate }) => {
     "/images/hamster-2.png",
     "/images/hamster-3.png",
   ];
-
   const maxJumpHeight = 160;
 
   const animateJump = () => {
     let start = null;
     let isJumpingUp = true;
     const duration = 280;
-    // calculateSizeAdjustValues;
     const step = (timestamp) => {
       if (!start) start = timestamp;
       const elapsed = timestamp - start;
@@ -94,6 +91,7 @@ const Hamster = ({ gameStarted, onGameOver, onScoreUpdate }) => {
                 }, 100);
 
                 onScoreUpdate(25);
+                onSeedScoreUp("+25");
               } else if (alt === "cat" || alt === "wheel") {
                 cancelAnimationFrame(jumpRef.current);
                 setPosition(position);

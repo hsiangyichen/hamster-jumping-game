@@ -6,6 +6,7 @@ import Hamster from "./components/Hamster";
 import Objects from "./components/Objects";
 import Ground from "./components/Ground";
 import GameOver from "./components/GameOver";
+import FadeOut from "./components/FadeOut";
 import styles from "./styles.module.scss";
 import StartButton from "./components/StartButton";
 
@@ -13,6 +14,7 @@ export default function Home() {
   const [gameStarted, setGameStarted] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
+  const [seedScoreUpMessage, setSeedScoreUpMessage] = useState(null);
   const highestScore = useSelector((state) => state.score.highestScore);
   const dispatch = useDispatch();
 
@@ -40,6 +42,13 @@ export default function Home() {
     setScore((prevScore) => prevScore + newScore);
   }, []);
 
+  const handleSeedScoreUpMessage = useCallback((message) => {
+    setSeedScoreUpMessage(message);
+    setTimeout(() => {
+      setSeedScoreUpMessage(null);
+    }, 500);
+  }, []);
+
   useEffect(() => {
     if (!gameStarted) return;
     const interval = setInterval(() => {
@@ -57,7 +66,7 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Hamster Jumping Game</h1>
+      {/* <h1 className={styles.title}>Hamster Jumping Game</h1> */}
 
       <div className={styles.gameArea}>
         {gameOver && <GameOver onRestart={handleRestart} score={score} />}
@@ -66,6 +75,7 @@ export default function Home() {
             gameStarted={gameStarted}
             onGameOver={handleGameOver}
             onScoreUpdate={handleScoreUpdate}
+            onSeedScoreUp={handleSeedScoreUpMessage}
           />
         </div>
         <div>
@@ -76,7 +86,10 @@ export default function Home() {
         </div>
         {!gameStarted && !gameOver && <StartButton onStart={handleStart} />}
         <div className={styles.scoreContainer}>
-          <div className={styles.score}>Score: {score}</div>
+          <div className={styles.score}>Score: {score} </div>
+          <div className={styles.seedScoreUpMessage}>
+            {seedScoreUpMessage && <FadeOut item={seedScoreUpMessage} />}
+          </div>
           <div className={styles.score}>Highest Score: {highestScore}</div>
         </div>
       </div>

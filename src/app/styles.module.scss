@@ -17,8 +17,8 @@
 .gameArea {
   width: 1000px;
   height: 300px;
-  // background-color: #e3dede;
-  background-color: #fff;
+  background-color: #e3dede;
+  // background-color: #fff;
   position: relative;
   overflow: hidden;
 }
@@ -42,33 +42,24 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 10px 20px;
 }
 
 .score {
-  padding: 10px 20px;
   font-size: 20px;
 }
+
+// .seedScoreUpMessage {
+//   // margin: 50px;
+//   display: flex;
+//   width: 100%;
+//   height: 100%;
+//   justify-content: center;
+//   align-items: center;
+// }
 
 .ground {
   position: absolute;
   bottom: 0;
   left: 0;
-}
-
-@keyframes moveObstacle {
-  0% {
-    left: 1060px;
-  }
-  100% {
-    left: -60px;
-  }
-}
-
-@keyframes moveGround {
-  0% {
-    background-position: 60px 0;
-  }
-  100% {
-    background-position: -1060px 0;
-  }
 }

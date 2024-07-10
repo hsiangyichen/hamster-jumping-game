@@ -3,3 +3,4 @@ export * from "./Ground";
 export * from "./GameOver";
 export * from "./StartButton";
 export * from "./Hamster";
+export * from "./FadeOut";
