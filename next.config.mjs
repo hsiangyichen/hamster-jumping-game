@@ -16,7 +16,7 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: "/(.*)", // Match all routes
+        source: "/:path*",
         headers: [
           {
             key: "Content-Security-Policy",
