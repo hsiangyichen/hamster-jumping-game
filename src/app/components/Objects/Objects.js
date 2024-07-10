@@ -27,7 +27,7 @@ const Objects = ({ gameStarted }) => {
     return {
       id: `${Date.now()}_${objectCounter++}`,
       x,
-      y: 300 - objectType.height - 24,
+      y: 300 - objectType.height - 39,
       ...objectType,
     };
   };

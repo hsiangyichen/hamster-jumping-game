@@ -88,7 +88,7 @@ const Hamster = ({ gameStarted, onGameOver, onScoreUpdate, onSeedScoreUp }) => {
                 obstacle.classList.add(styles["fade-out"]);
                 setTimeout(() => {
                   obstacle.style.display = "none";
-                }, 100);
+                }, 300);
 
                 onScoreUpdate(25);
                 onSeedScoreUp("+25");

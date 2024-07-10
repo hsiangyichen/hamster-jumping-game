@@ -87,10 +87,13 @@ export default function Home() {
         {!gameStarted && !gameOver && <StartButton onStart={handleStart} />}
         <div className={styles.scoreContainer}>
           <div className={styles.score}>Score: {score} </div>
+
+          <div className={styles.score}>Highest Score: {highestScore}</div>
+        </div>
+        <div className={styles.seedScoreUpMessageContainer}>
           <div className={styles.seedScoreUpMessage}>
             {seedScoreUpMessage && <FadeOut item={seedScoreUpMessage} />}
           </div>
-          <div className={styles.score}>Highest Score: {highestScore}</div>
         </div>
       </div>
     </div>
