@@ -13,15 +13,19 @@ const nextConfig = {
 
     return config;
   },
-
   async headers() {
     return [
       {
-        source: "/(.*)",
+        source: "/(.*)", // Match all routes
         headers: [
           {
+            key: "Content-Security-Policy",
+            value:
+              "frame-ancestors 'self' http://localhost:3000 https://hamster-jumping-game.vercel.app/",
+          },
+          {
             key: "X-Frame-Options",
-            value: "SAMEORIGIN",
+            value: "ALLOW-FROM http://localhost:3000",
           },
         ],
       },
