@@ -15,7 +15,6 @@ body {
   background-color: #ffffff;
   /* background-color: #e3dede; */
   line-height: 1.6;
-  min-height: 100vh; /* Ensures the body is at least the height of the viewport */
 }
 
 button {

@@ -1,19 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Fade } from "react-awesome-reveal";
 import styles from "./styles.module.scss";
 
 const GameOver = ({ onRestart, score }) => {
   const [imagesLoaded, setImagesLoaded] = useState({
-    image1: false,
-    image2: false,
+    gameOver: false,
+    restart: false,
   });
 
   const handleImageLoad = (image) => {
-    setImagesLoaded((prevState) => ({ ...prevState, [image]: true }));
+    setImagesLoaded((prev) => ({ ...prev, [image]: true }));
   };
 
-  const allImagesLoaded = imagesLoaded.image1 && imagesLoaded.image2;
+  const allImagesLoaded = imagesLoaded.gameOver && imagesLoaded.restart;
 
   return (
     <div className={styles.container}>
@@ -24,17 +24,24 @@ const GameOver = ({ onRestart, score }) => {
               src="/images/gameOver.png"
               width={275}
               height={210}
-              alt="hamster"
-              onLoad={() => handleImageLoad("image1")}
+              alt="Game Over"
+              onLoad={() => handleImageLoad("gameOver")}
+              className={!allImagesLoaded ? styles.hidden : ""}
             />
           </div>
-          <button onClick={onRestart} className={styles.playAgainButton}>
+          <button
+            onClick={onRestart}
+            className={`${styles.playAgainButton} ${
+              !allImagesLoaded ? styles.hidden : ""
+            }`}
+          >
             <Image
               src="/images/startAgain.png"
               width={165}
               height={48}
-              alt="hamster"
-              onLoad={() => handleImageLoad("image2")}
+              alt="Restart"
+              onLoad={() => handleImageLoad("restart")}
+              className={!allImagesLoaded ? styles.hidden : ""}
             />
           </button>
           {allImagesLoaded && (
