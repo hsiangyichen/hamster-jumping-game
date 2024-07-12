@@ -2,9 +2,12 @@ import React from "react";
 import styles from "./styles.module.scss";
 import Image from "next/image";
 
-const StartButton = ({ onStart }) => {
+const StartGame = ({ onStart }) => {
   return (
     <div className={styles.container}>
+      <h1 className={styles.instruction}>
+        Jump to avoid hitting cats and wheels!
+      </h1>
       <button onClick={onStart} className={styles.startButton}>
         <Image
           src="/images/startButton.png"
@@ -17,4 +20,4 @@ const StartButton = ({ onStart }) => {
   );
 };
 
-export default StartButton;
+export default StartGame;

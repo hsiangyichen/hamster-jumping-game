@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import GroundSVG from "@assets/ground.svg";
 import styles from "./styles.module.scss";
 
 const Ground = ({ gameStarted }) => {
@@ -8,7 +7,7 @@ const Ground = ({ gameStarted }) => {
   const [windowWidth, setWindowWidth] = useState(0);
   const [loadedImages, setLoadedImages] = useState(0);
   const [allImagesLoaded, setAllImagesLoaded] = useState(false);
-  const imageWidth = 270;
+  const imageWidth = 500;
   const intervalRef = useRef(null);
 
   useEffect(() => {
@@ -23,24 +22,24 @@ const Ground = ({ gameStarted }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const numberOfImages = Math.ceil(windowWidth / imageWidth); // Number of images to cover window width
+  const numberOfImages = Math.ceil(windowWidth / imageWidth); // +1 to ensure covering the window
 
   const images = Array.from({ length: numberOfImages + 1 }).map((_, index) => {
-    const newIndex =
-      (position + index * imageWidth) % (imageWidth * numberOfImages);
+    const leftPosition = position + index * imageWidth;
+
     return (
       <div
         key={index}
-        style={{ left: newIndex, display: allImagesLoaded ? "block" : "none" }}
-        className={styles.groundImage}
+        style={{
+          left: leftPosition,
+          display: allImagesLoaded ? "flex" : "none",
+          position: "absolute",
+        }}
       >
-        {/* <div onLoad={() => handleImageLoad()}>
-          <GroundSVG width={imageWidth} height={70} />
-        </div> */}
         <Image
-          src="/images/ground.png"
+          src="/images/line.png"
           width={imageWidth}
-          height={50}
+          height={6}
           alt="ground"
           onLoad={() => handleImageLoad()}
         />

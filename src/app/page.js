@@ -8,7 +8,7 @@ import Ground from "./components/Ground";
 import GameOver from "./components/GameOver";
 import FadeOut from "./components/FadeOut";
 import styles from "./styles.module.scss";
-import StartButton from "./components/StartButton";
+import StartGame from "./components/StartGame";
 
 export default function Home() {
   const [gameStarted, setGameStarted] = useState(false);
@@ -70,7 +70,11 @@ export default function Home() {
 
       <div className={styles.gameArea}>
         {gameOver && <GameOver onRestart={handleRestart} score={score} />}
-        <div className={styles.hamster}>
+        <div
+          className={`${styles.hamster} ${
+            !gameStarted && !gameOver ? styles.initialOpacity : ""
+          }`}
+        >
           <Hamster
             gameStarted={gameStarted}
             onGameOver={handleGameOver}
@@ -81,11 +85,19 @@ export default function Home() {
         <div>
           <Objects gameStarted={gameStarted} />
         </div>
-        <div className={styles.ground}>
+        <div
+          className={`${styles.ground} ${
+            !gameStarted && !gameOver ? styles.initialOpacity : ""
+          }`}
+        >
           <Ground gameStarted={gameStarted} />
         </div>
-        {!gameStarted && !gameOver && <StartButton onStart={handleStart} />}
-        <div className={styles.scoreContainer}>
+        {!gameStarted && !gameOver && <StartGame onStart={handleStart} />}
+        <div
+          className={`${styles.scoreContainer} ${
+            !gameStarted && !gameOver ? styles.initialOpacity : ""
+          }`}
+        >
           <div className={styles.score}>Score: {score} </div>
 
           <div className={styles.score}>Highest Score: {highestScore}</div>

@@ -14,12 +14,12 @@ const Hamster = ({ gameStarted, onGameOver, onScoreUpdate, onSeedScoreUp }) => {
     "/images/hamster-2.png",
     "/images/hamster-3.png",
   ];
-  const maxJumpHeight = 160;
+  const maxJumpHeight = 180;
 
   const animateJump = () => {
     let start = null;
     let isJumpingUp = true;
-    const duration = 280;
+    const duration = 270;
     const step = (timestamp) => {
       if (!start) start = timestamp;
       const elapsed = timestamp - start;

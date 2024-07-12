@@ -4,8 +4,8 @@ import styles from "./styles.module.scss";
 
 const Objects = ({ gameStarted }) => {
   const [objects, setObjects] = useState([]);
-  const minX = 500; // Minimum starting x value
-  const maxX = 1200; // Maximum starting x value
+  const minX = 200; // Minimum starting x value
+  const maxX = 800; // Maximum starting x value
   const minInterval = 400; // Minimum interval between objects
   const maxInterval = 900; // Maximum interval between objects
   const objectWidth = 70;
@@ -13,8 +13,18 @@ const Objects = ({ gameStarted }) => {
 
   const objectTypes = [
     { src: "/images/cat.png", width: 75, height: 50, alt: "cat" },
-    { src: "/images/seed.png", width: 70, height: 50, alt: "seed" },
-    { src: "/images/wheel.png", width: 65, height: 65, alt: "wheel" },
+    {
+      src: "/images/seed.png",
+      width: 70,
+      height: 50,
+      alt: "seed",
+    },
+    {
+      src: "/images/wheel.png",
+      width: 65,
+      height: 65,
+      alt: "wheel",
+    },
   ];
 
   const generateObject = (prevX) => {
@@ -27,7 +37,7 @@ const Objects = ({ gameStarted }) => {
     return {
       id: `${Date.now()}_${objectCounter++}`,
       x,
-      y: 300 - objectType.height - 39,
+      y: 300 - objectType.height - 23,
       ...objectType,
     };
   };

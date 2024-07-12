@@ -7,6 +7,10 @@
   // align-items: center;
 }
 
+.initialOpacity {
+  opacity: 0.3;
+}
+
 .title {
   margin-bottom: 50px;
   color: #331d0c;
@@ -27,9 +31,12 @@
 .hamster {
   position: absolute;
   rotate: -3deg;
-  bottom: 9px;
+  bottom: -7px;
   left: 120px;
   z-index: 2;
+  &.initialOpacity {
+    opacity: 0.3;
+  }
 }
 
 .obstacle {
@@ -45,7 +52,9 @@
   // width: 100%;
   justify-content: space-between;
   padding: 10px 20px;
-  // min-width: 200px;
+  &.initialOpacity {
+    opacity: 0.3;
+  }
 }
 
 .score {
@@ -72,7 +81,16 @@
 }
 
 .ground {
+  // width: 100%;
   position: absolute;
   bottom: 0;
   left: 0;
+  &.initialOpacity {
+    opacity: 0.2;
+  }
 }
+
+// .line {
+//   width: 100%;
+//   border-bottom: #331d0c solid 2px;
+// }
