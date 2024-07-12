@@ -5,9 +5,7 @@ import Image from "next/image";
 const StartGame = ({ onStart }) => {
   return (
     <div className={styles.container}>
-      <h1 className={styles.instruction}>
-        Jump to avoid hitting cats and wheels!
-      </h1>
+      <h1 className={styles.instruction}>Jump to avoid the cats and wheels!</h1>
       <button onClick={onStart} className={styles.startButton}>
         <Image
           src="/images/startButton.png"
