@@ -7,13 +7,8 @@
   z-index: 20;
 }
 
-.instruction {
-  font-size: 32px;
-  font-weight: 100;
-  padding-bottom: 30px;
-}
-
 .startButton {
+  padding-top: 30px;
   background-color: transparent;
   font-size: x-large;
   border: none;
@@ -23,4 +18,113 @@
 
 .startButton:hover {
   transform: scale(1.05);
+}
+
+.instructionOne,
+.instructionTwo {
+  font-size: 32px;
+  font-weight: 100;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.instructionTwo {
+  min-width: 560px;
+}
+
+.spaceAndArrowImageContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.spaceImageContainer,
+.seedImageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.seedImage {
+  width: 65px;
+  height: 50px;
+}
+
+.spaceImage {
+  width: 125px;
+  height: 52px;
+}
+
+.arrowImage {
+  width: 36px;
+  height: 48px;
+  position: relative;
+  right: 23px;
+  bottom: 30px;
+}
+
+@keyframes moveUpDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.arrowImage.animate {
+  animation: moveUpDown 0.5s infinite;
+}
+
+@media (max-width: 1100px) {
+  .startButton {
+    padding-top: 30px;
+  }
+
+  .instructionOne,
+  .instructionTwo {
+    font-size: 24px;
+  }
+  .instructionTwo {
+    min-width: 412px;
+  }
+
+  .spaceImageContainer,
+  .seedImageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .seedImage {
+    width: 55px;
+    height: 40px;
+  }
+
+  .spaceImage {
+    width: 96px;
+    height: 42px;
+  }
+
+  .arrowImage {
+    width: 26px;
+    height: 36px;
+    position: relative;
+    right: 14px;
+    bottom: 21px;
+  }
+
+  .arrowImage.animate {
+    animation: moveUpDown 0.5s infinite;
+  }
+
+  .startButtonImage {
+    width: 135px;
+    height: 45px;
+  }
 }
