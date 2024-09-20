@@ -21,7 +21,7 @@ const nextConfig = {
           {
             key: "Content-Security-Policy",
             value:
-              "frame-ancestors 'self' http://localhost:3000 https://michelle-portfolio-iota.vercel.app/",
+              "frame-ancestors 'self' http://localhost:3000 https://www.michellehsiang.xyz/ https://michelle-portfolio-iota.vercel.app/",
           },
           {
             key: "X-Frame-Options",
